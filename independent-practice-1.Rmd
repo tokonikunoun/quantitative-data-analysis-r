@@ -1,0 +1,177 @@
+---
+title: "Exploratory Data Analysis of Diamonds"
+author: "Tokoni Kunoun"
+date: "2026-11-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+## Create a new R project, and a copy the R markdown file (Independent practice week 1) onto your computer. Load the ggplot2 library. Make sure you answer the questions using the R markdown. (if you are not able to load the ggplot library download the csv version)
+
+```{r}
+  # I would load the ggplot2 library now as required by the independent lab session.
+  library(ggplot2)
+```
+
+```{r}
+  # Now I would access the diamonds data
+  data("diamonds")
+```
+## Check that the data set (diamonds) does indeed contain the columns as in Table 1
+
+ I want to check that the diamonds table contains the columns as shown in the table in the independent lab session
+ 
+```{r}
+  str(diamonds)
+```
+The output confirms that it indeed shows the table columns as specified in the lab session.
+
+## Table 1 specifies some ranges for price, carat, x, y, z, length, table. Are there any values in the data that are outside the range? Which ones, and suggest a different range.
+
+ Now I want to check the range for price, carat, x, y, z, length, and table. That they are in the requirement of the independent lab session.
+ 
+```{r}
+  range(diamonds$price)
+  range(diamonds$carat)
+  range(diamonds$x)
+  range(diamonds$y)
+  range(diamonds$z)
+  range(diamonds$depth)
+  range(diamonds$table)
+```
+The output shows that all the columns except for that of z falls within the range of what is specified in the independent lab session sheet. For z, the independent lab session specified 0 - 3.18, however, the output here shows 0 - 31.8.
+
+## How many levels (or different categories) are in the column labelled cut?
+
+```{r}
+  levels(diamonds$cut)
+```
+From the output we can see that there are 5 different categories (namely: Fair, Good, Very Good, Premium, and Ideal) for the level column.
+
+## Generate a numerical summary for each variable in the data set - take care to use the appropriate technique for each different variable type.
+
+```{r}
+  # I am generating the numerical summary for price of diamonds
+  summary(diamonds$price)
+```
+From the output, we can see that the minimum price of diamond is 326, and the maximum price of diamond is 18823, the median of the price of diamond is 2401 and the mean is 3933 which is higher than the median, suggesting that there are more higher prices in the 50% above the median. The middle 50% of the price of diamonds is between 950 (1st quartile) and 5324 (3rd quartile).
+
+```{r}
+  # I am generating the numerical summary for carat of diamonds
+  summary(diamonds$carat)
+```
+The output shows that the minimum carat of diamonds is 0.200 while the maximum carat of gold is 5.010. The median is 0.7000 while the mean is 0.7979, and the middle 50% rests between 0.400 (1st quartile) and 1.040 (3rd quartile).
+
+```{r}
+  # I will now look at the summary for the cut, which is an ordinal variable.
+  table(diamonds$cut)
+```
+So we can see from the output that fair (1610) had the least cut while ideal (21551) had the major cut.
+
+```{r}
+  # I will now look at the summary for color, which is also an ordinal variable.
+  table(diamonds$color)
+```
+From the output we can see that J (2808) had the least number of colors, while G (11292) had the most number of colors
+
+```{r}
+  # I will now look at the summary for the clarity, which is also a ordinal variable.
+  table(diamonds$clarity)
+```
+From the output we can see that I1 had the least number (741) of assignments for clarity and SI1 had the most number (13065) of assignments.
+
+```{r}
+  # I am now looking at the summary for x, which is a numerical variable.
+  summary(diamonds$x)
+```
+The output shows that the minimum value for x for diamonds is 0.0 while the maximum value for x is 10.740. The middle 50% lies between 4.710 (1st quartile) and 6.540 (3rd quartile), while the median is 5.700 and the mean is 5.731.
+
+```{r}
+  # I am now looking at the summary for y, which is a numerical variable.
+  summary(diamonds$y)
+```
+The output shows that the minimum value for y for diamonds is 0.00 while the maximum value for y is 58.90. The middle 50% lies between 4.720 (1st quartile) and 6.540 (3rd quartile), with the median being 5.710 and the mean being 5.735.
+
+```{r}
+  # I am now looking at the summary for z, which is a numerical variable.
+  summary(diamonds$z)
+```
+The output shows a minimum value of 0.00 and a maximum value of 31.800. The middle 50% lies between 2.910 (1st quartile) and 4.040 (3rd quartile), with the median being 3.530 and the mean being 3.539.
+
+```{r}
+  # I am now looking at the summary for depth, which is a numerical variable.
+  summary(diamonds$depth)
+```
+The output shows a minimum value of 43.00 and a maximum value of 79.00. The middle 50% lies between 61.00 (1st quartile) and 62.50 (3rd quartile), with the median being 61.80 and the mean being 61.75.
+
+```{r}
+  # I am now looking at the summary for table, which is a numerical variable.
+  summary(diamonds$table)
+```
+The output shows a minimum value of 43.00 and a maximum value of 95.00. The middle 50% lies between 56.00 (1st quartile) and 59.00 (3rd quartile), with the mean being 57.46 and the median being 57.00.
+
+## For each variable, generate a plot, use different options and make sure the plots are labelled, and suitable to the type of variable.
+
+```{r}
+  # I will now examine price, which is a numerical variable, using the histogram.
+  hist(diamonds$price, main = "Price of Diamonds", xlab = "Price", ylab = "Frequency", col = "green")
+```
+This is a right skewed distribution as we can see from the histogram above, after the peak, there is a long right distribution toward higher prices.
+
+```{r}
+  # I will now examine carat using histogram, because carat is a numerical variable.
+  hist(diamonds$carat, main = "Carat of Diamonds", xlab = "Carat", ylab = "Frequency", col = "blue")
+```
+This is the histogram for carat
+
+```{r}
+  # I will now examine cut which is an ordinal (categorical) variable, therefore, would use a barplot.
+  barplot(table(diamonds$cut), main = "Cut of Diamonds", xlab = "Cut", ylab = "Frequency", col = "cyan")
+```
+This is the bar plot with ideal having the most frequency.
+
+```{r}
+  # Now I am going to examine the color, which is also a categorical variable.
+  barplot(table(diamonds$cut), main = "Color of Diamonds", xlab = "Color", ylab = "Frequency", col = "navy")
+```
+Ideal appears to have the most frequency.
+
+```{r}
+  # I am now examining the clarity of diamonds, which is also a categorical variable.
+  barplot(table(diamonds$clarity), main = "Clarity of Diamonds", xlab = "Clarity", ylab = "Frequency", col = "yellow")
+```
+```{r}
+  # Now I am examining the x of diamonds, which is a numerical variable.
+  hist(diamonds$x, main = "X of Diamonds", xlab = "X", ylab = "Frequency", col = "purple")
+```
+```{r}
+  # I am now examining the y of diamonds which is a numerical variable.
+  hist(diamonds$y, main = "Y of Diamonds", xlab = "Y", ylab = "Frequency", col = "lightblue")
+```
+```{r}
+  # Now I am examining the z of diamonds, which is also a numerical variable.
+  hist(diamonds$z, main = "Z of Diamonds", xlab = "Z", ylab = "Frequency", col = "violet")
+```
+```{r}
+  # I am now examining the depth of diamonds, which is a numerical variable.
+  hist(diamonds$depth, main = "Depth of Diamonds", xlab = "Depth", ylab = "Frequency", col = "gray")
+```
+
+```{r}
+  # Finally, I am now examining table, which is a numerical variable, and the final one.
+  hist(diamonds$table, main = "Table of Diamonds", xlab = "Table", ylab = "Frequency", col = "white")
+```
+## Explore the graphing of one categorical against one of the continous variables in this data.
+
+```{r}
+  # For this diagram, I would make use of the boxplot
+  boxplot(price ~ clarity, data = diamonds)
+```
+
