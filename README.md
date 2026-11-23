@@ -10,6 +10,36 @@ This project explores the `diamonds` dataset available in the `ggplot2` R packag
 
 The project focuses on applying foundational quantitative data analysis techniques to understand the dataset's structure, distributions, data quality, and relationships between variables.
 
+## Weekly Lab Portfolio
+
+This repository documents my practical learning and development in quantitative data analysis using R and RStudio as part of my MSc Artificial Intelligence programme at Brunel University London.
+
+Each lab contains reproducible R Markdown analysis, statistical interpretations and an HTML report.
+
+### Week 1 — Exploratory Data Analysis
+
+**Dataset:** Diamonds (`ggplot2`)
+
+**Topics:** Data exploration, descriptive statistics, data quality assessment and statistical visualisation.
+
+- [View Week 1 Report](https://tokonikunoun.github.io/quantitative-data-analysis-r/)
+
+- [View Week 1 R Markdown Source](https://github.com/tokonikunoun/quantitative-data-analysis-r/blob/main/independent-practice-1.Rmd)
+
+### Week 2 — Confidence Intervals and Statistical Distributions
+
+**Dataset:** Auto MPG (UCI Machine Learning Repository)
+
+**Topics:** Statistical distributions, confidence intervals for means and proportions, confidence levels and statistical inference.
+
+- [View Week 2 Report](https://tokonikunoun.github.io/quantitative-data-analysis-r/week-02/independent-practice-2.html)
+
+- [View Week 2 Lab Files](https://github.com/tokonikunoun/quantitative-data-analysis-r/tree/main/week-02)
+
+---
+
+*Additional weekly labs will be added as I progress through the module.*
+
 ## Objectives
 
 The analysis is organised around five objectives:
