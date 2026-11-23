@@ -1,0 +1,132 @@
+---
+title: "CS5701 — Week 2 Independent Lab"
+author: "Tokoni Kunoun"
+date: "2026-11-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Read in the auto-mpg.csv data set into your new R markdown file 
+
+I would use r to read the auto mpg file and assign it to a data frame called data
+
+```{r}
+  data <- read.csv("auto-mpg.csv")
+```
+
+## Explore the data (using summary statistics and plots) and check which columns from the continous variables look normally distributed.
+
+```{r}
+  str(data)
+```
+So from the output above, we can see that there are 398 observations of 9 variables. Out of the 9 variables, 7 are continous/numerical variables while two are categorical variables. 
+
+# I would now explore the continous/numerical variables to see which looks normally distributed.
+
+# I would be examining the MPG variable for its distribution
+```{r}
+  hist(data$mpg, main = "Histogram of MPG", xlab = "MPG", ylab = "Frequency", col = "blue")
+```
+This (MPG) leans towards right-skewed distribution.
+
+# I would be examining the Cylinders variable for its distribution
+```{r}
+  hist(data$cylinders, main = "Histogram of Cylinders", xlab = "Cylinders", ylab = "Frequency", col = "navy")
+```
+This (cylinders) is not a normally distributed histogram.
+
+# I would be examining the Displacement variable for its distribution
+```{r}
+  hist(data$displacement, main = "Histogram of Displacement", xlab = "Displacement", ylab = "Frequency", col = "lightblue")
+```
+This (Displacement) is not a normal distribution histogram.
+
+# I would be examining the Weight variable for its distribution
+```{r}
+  hist(data$weight, main = "Histogram of Weight", xlab = "Weight", ylab = "Frequency", col = "red")
+```
+This (Weight) is a right skewed distribution histogram.
+
+# I would be examining the Acceleration variable for its distribution
+```{r}
+  hist(data$acceleration, main = "Histogram of Acceleration", xlab = "Acceleration", ylab = "Frequency", col = "green")
+```
+The Acceleration histogram is a normal distribution histogram.
+
+# I would be examining the Model.Year variable for its distribution
+```{r}
+  hist(data$model.year, main = "Histogram of Model Year", xlab = "Model Year", ylab = "Frequency", col = "yellow")
+```
+Model.year is not normally distributed.
+
+# I would be examining the Origin variable for its distribution
+```{r}
+  hist(data$origin, main = "Histogram of Origin", xlab = "Origin", ylab = "Frequency", col = "cyan")
+```
+The origin variable is not normally distributed.
+
+# I would now explore the categorical variables using boxplot
+
+# I would be examining the horsepower variable for its distribution
+```{r}
+  boxplot(table(data$horsepower), main = "Boxplot of Horsepower", xlab = "Horsepower", ylab = "Frequency", col = "violet")
+```
+I can't comment on the distribution of this.
+
+# I would be examining the Car name variable for its distribution
+```{r}
+  boxplot(table(data$car.name), main = "Boxplot of Car Name", xlab = "Car Name", ylab = "Frequency", col = "lightblue")
+```
+This is not normally distributed.
+
+## Compute a 95% confidence interval for the mean for one of the variable that appears to be normally distributed.
+```{r}
+  t.test(data$acceleration, conf.level = 0.95)
+```
+
+Acceleration appears to be normally distributed and I have computed the confidence interval for it. The 95% confidence interval for acceleration is 15.296 to 15.840, rounded to three decimal places.
+
+## The model years range from the 70s and the 80s. What proportion of cars are from the 80s?
+```{r}
+   mean(data$model.year >= 80) * 100
+```
+Approximately 22.4% of cars are from the 80s
+
+## Compute a 90% confidence interval for the proportion of cars from the 80s?
+```{r}
+  prop.test(sum(data$model.year >= 80), nrow(data), conf.level = 0.9)
+```
+The 90% confidence interval for the proportion of cars from the 80s is between 0.19 and 0.26 rounded to two decimal place.
+
+## Change the confidence level and track what happens to the width of the confidence interval for 6. and 8.
+```{r}
+  prop.test(sum(data$model.year >= 80), nrow(data), conf.level = 0.6)
+```
+```{r}
+  prop.test(sum(data$model.year >= 80), nrow(data), conf.level = 0.8)
+```
+The width gets narrower as the confidence level reduces.
+
